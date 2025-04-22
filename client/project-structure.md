@@ -2,7 +2,7 @@ e-cart-mern-app/
 ├── public/
 │   └── assets/
 │       └── images/
-│       └── favicon.svg
+│       └── favicon.svg / favicon.ico
 │
 ├── src/
 │   ├── assets/
@@ -11,14 +11,26 @@ e-cart-mern-app/
 │   │
 │   ├── components/
 │   │   ├── common/
+│   │   │   └── Header.jsx
+│   │   │   └── Footer.jsx
+│   │   │   └── Loader.jsx
 │   │   ├── user/
+│   │   │   └── ProductCard.jsx
+│   │   │   └── CartItem.jsx
 │   │   └── admin/
+│   │       └── Sidebar.jsx
+│   │       └── AdminTable.jsx
 │   │
 │   ├── layouts/
 │   │   ├── UserLayout.jsx
 │   │   └── AdminLayout.jsx
 │   │
 │   ├── pages/
+│   │   ├── auth/
+│   │   │   └── UserLogin.jsx
+│   │   │   └── UserSignup.jsx
+│   │   │   └── AdminLogin.jsx
+│   │   │
 │   │   ├── user/
 │   │   │   └── Home.jsx
 │   │   │   └── ProductDetails.jsx
@@ -37,32 +49,27 @@ e-cart-mern-app/
 │   ├── routes/
 │   │   └── AdminRoutes.jsx
 │   │   └── UserRoutes.jsx
+│   │   └── ProtectedRoute.jsx
 │
 │   ├── services/
 │   │   └── api.js
+│   │   └── authService.js
 │   │   └── productService.js
 │   │   └── orderService.js
-│   │   └── authService.js
-│   │
-│   ├── store/
-│   │   └── index.js
-│   │   └── cartSlice.js
-│   │   └── userSlice.js
-│   │   └── adminSlice.js
-│   │
+│
 │   ├── hooks/
-│   │   └── useCart.js
 │   │   └── useAuth.js
 │   │   └── useAdmin.js
-│   │
+│   │   └── useCart.js
+│
 │   ├── utils/
 │   │   └── formatCurrency.js
 │   │   └── validators.js
-│   │
+│
 │   ├── App.jsx
 │   └── main.jsx
 │
 ├── .env
-├── vite.config.js
 ├── package.json
-└── README.md
+├── vite.config.js
+├── README.md
