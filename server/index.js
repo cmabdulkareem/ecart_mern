@@ -1,25 +1,20 @@
 import express from 'express'
-import adminRouter from './routes/adminRoutes.js'
-import userRouter from './routes/userRoutes.js'
-import './config/db.js'
 const app = express()
+import adminRoutes from './routes/adminRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 import { config } from 'dotenv'
 config()
 
-app.use(express.json())
 
-app.use('/admin', adminRouter)
-app.use('/', userRouter)
+
+
+
+app.use('/', userRoutes)
+app.use('/admin', adminRoutes)
 
 app.listen(process.env.PORT, ()=>{
-    console.log(`http://localhost:${process.env.PORT}`);
+    console.log(`running server on http://localhost:${process.env.PORT}`);
 })
-
-
-
-
-
-
 
 
 
