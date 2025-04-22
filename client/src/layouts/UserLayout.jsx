@@ -5,10 +5,12 @@ import {Outlet} from 'react-router-dom'
 
 function UserLayout() {
   return (
-    <div>
-        <Header />
+    <div className="container">
+      <div className="row">
+      <Header />
             <Outlet />
-        <Footer />
+      <Footer />
+      </div>
     </div>
   )
 }
