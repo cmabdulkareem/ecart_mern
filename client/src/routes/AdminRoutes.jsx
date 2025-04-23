@@ -11,10 +11,8 @@ import Loader from '../components/common/Loader'
 
 function AdminRoutes() {
   return (
-    <div className="container">
-        <div className="row">
             <Routes>
-                <Route path='/admin' element={ <AdminLayout /> }>
+                <Route path='/' element={ <AdminLayout /> }>
                     <Route path='' element={ <Dashboard /> } />
                     <Route path='orders' element={ <Orders /> } />
                     <Route path='products' element={ <Products /> } />
@@ -24,8 +22,6 @@ function AdminRoutes() {
                     <Route path='loader' element={ <Loader /> } />
                 </Route>
             </Routes>
-        </div>
-    </div>
   )
 }
 

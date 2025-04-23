@@ -13,8 +13,6 @@ import UserSignup from '../pages/auth/UserSignup'
 
 function UserRoutes() {
   return (
-    <div className="container">
-      <div className="row">
         <Routes>
           <Route path='/' element={<UserLayout />} >
             <Route path='' element={<Home />} />
@@ -27,9 +25,6 @@ function UserRoutes() {
             <Route path='signin' element={<UserLogin />} />
           </ Route>
         </Routes>
-      </div>
-    </div>
-
   )
 }
 
