@@ -1,0 +1,13 @@
+.nav_active{
+    color: tomato;
+    text-decoration: none;
+}
+
+.nav_active:active{
+    color: violet;
+}
+
+.nav_inactive{
+    color: rgb(67, 67, 67);
+    text-decoration: none;
+}

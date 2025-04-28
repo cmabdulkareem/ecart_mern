@@ -1,28 +1,42 @@
 import React, { useState } from 'react';
 import axios from 'axios'
+import {ToastContainer, toast} from 'react-toastify'
+import {useNavigate} from 'react-router-dom'
 
 
 
 export default function UserSignup() {
+
+  const navigate = useNavigate()
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [OTP, setOTP] = useState("")
   const [isOTPSent, setIsOTPSent] = useState(false)
 
-
-
   function handleSendOTP(){
-    setIsOTPSent(true)
+
+    axios.post(`http://localhost:3000/sendOTP`, {email})
+    .then((data)=>{
+      toast.success(data.data.message);
+      setIsOTPSent(true)
+    })
+    .catch((err)=>{
+      toast.error(err.response.data.error);
+    })
   }
 
   function handleUserSignup(e){
     e.preventDefault()
-    axios.post(`http://localhost:3000/signup`, {username, email, password})
+    axios.post(`http://localhost:3000/signup`, {username, email, password, OTP})
       .then((data)=>{
-        console.log(data.data.message);
+        toast.success(data.data.message);
+        setTimeout(() => {
+          navigate('/signin')
+        }, 2000);
       })
       .catch((err)=>{
-        console.error(err);
+        toast.error(err.response.data.error);
       })
   }
 
@@ -46,12 +60,13 @@ export default function UserSignup() {
           <div className="mb-3">
             <label htmlFor="otp" className="form-label">OTP</label>
             <div className="input-group">
-              <input type="text" className="form-control" id="otp" placeholder="Enter OTP" required disabled={!isOTPSent} />
+              <input type="text" className="form-control" id="otp" onChange={(e)=>setOTP(e.target.value)} value={OTP}  placeholder="Enter OTP" required disabled={!isOTPSent} />
               <input type="button" className="btn btn-outline-secondary" onClick={handleSendOTP} value="Send OTP" />
             </div>
           </div>
-          <button type="submit" className="btn btn-success w-100">Register</button>
+          <button type="submit" className="btn btn-success w-100" disabled={!isOTPSent}>Register</button>
         </form>
+        <ToastContainer />
       </div>
     </div>
   );

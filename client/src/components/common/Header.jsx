@@ -1,4 +1,6 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
+import '../../assets/styles/style.css'
 
 function Header() {
     return (
@@ -8,38 +10,28 @@ function Header() {
                     href="/"
                     className="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none"
                 >
-                    <h3>LOGO HERE</h3>
+                    <h3 className=''>LOGO HERE</h3>
                 </a>
                 <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li>
-                        <a href="#" className="nav-link px-2 link-secondary">
-                            Overview
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="nav-link px-2 link-body-emphasis">
+                        <NavLink to="/admin/" end className={({ isActive }) => isActive ? 'nav_active px-2' : 'nav_inactive px-2'}>
                             Dashboard
-                        </a>
+                        </NavLink>
                     </li>
                     <li>
-                        <a href="#" className="nav-link px-2 link-body-emphasis">
+                        <NavLink to="/admin/products"  className={({ isActive }) => isActive ? 'nav_active px-2' : 'nav_inactive px-2'}>
                             Products
-                        </a>
+                        </NavLink>
                     </li>
                     <li>
-                        <a href="#" className="nav-link px-2 link-body-emphasis">
-                            Orders
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="nav-link px-2 link-body-emphasis">
-                            Users
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="nav-link px-2 link-body-emphasis">
+                        <NavLink to="/admin/reports"  className={({ isActive }) => isActive ? 'nav_active px-2' : 'nav_inactive px-2'}>
                             Reports
-                        </a>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/admin/users"  className={({ isActive }) => isActive ? 'nav_active px-2' : 'nav_inactive px-2'}>
+                            Users
+                        </NavLink>
                     </li>
                 </ul>
                 {/* <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
