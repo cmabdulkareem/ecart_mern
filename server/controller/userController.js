@@ -1,9 +1,6 @@
-import { response } from 'express'
 import User from '../models/userModel.js'
 import { transporter } from '../config/mailservice.js'
 import bcrypt from 'bcryptjs'
-
-
 
 function generateOTP(){
     return Math.floor(100000+Math.random()*999999).toString()
@@ -26,7 +23,6 @@ export const signUpHandler = async (req, res) => {
                     const hashedPassword = await bcrypt.hashSync(password, 10)
 
                     const user = await User.create({ username, email, password: hashedPassword })
-
                     console.log(user);
 
                     if (!user) {
@@ -36,7 +32,6 @@ export const signUpHandler = async (req, res) => {
                 }else{
                     res.status(400).json({ error: "Invalid OTP" })
                 }
-                
             } else {
                 res.status(500).json({ error: "username not available" })
             }
