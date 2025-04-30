@@ -1,12 +1,31 @@
 import User from '../models/userModel.js'
 import { transporter } from '../config/mailservice.js'
 import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+
+const secretKey = "mysecret"
 
 function generateOTP(){
     return Math.floor(100000+Math.random()*999999).toString()
 }
 
 let storedOTP = ''
+
+export const authChecking = async (req, res) =>{
+    try {
+        const token = req.cookies.token
+        if(!token){
+            return res.status(401).json({error: "User not logged in"})
+        }
+
+        const decoded = jwt.verify(token, secretKey)
+        console.log(decoded);
+        
+        res.status(200).json({authenticated: true})
+    } catch (error) {
+        res.status(500).json({error: "Internal server error"})
+    }
+}
 
 export const signUpHandler = async (req, res) => {
     try {
@@ -67,5 +86,46 @@ export const sendOTPhandler = async (req, res)=>{
         }
     } catch (error) {
         res.status(500).json({error: "Internal server error"})
+    }
+}
+
+export const userLoginHandler = async (req, res)=>{
+    try {
+        const {username, password} = req.body
+
+        if (!username || !password ) {
+            return res.status(400).json({ error: "Both username and password required" })
+        }else{
+            const user = await User.findOne({username})
+
+            if(!user){
+                return res.status(400).json({ error: "User not found" })
+            }else{
+                const isMatch = await bcrypt.compare(password, user.password)
+
+
+                if(!isMatch){
+                    return res.status(400).json({ error: "Invalid password" })
+                }
+
+                const payload = {
+                    id: user._id,
+                    username: user.username,
+                    email: user.email
+                }
+
+                const token = jwt.sign(payload, secretKey, {expiresIn: '1h'})
+
+                res.cookie('token', token, {
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: 'None',
+                    maxAge: 86400000
+                })
+                return res.status(200).json({message: "Login succesfull"})
+            }
+        }
+    } catch (error) {
+        res.status(200).json({error: "Internal server error"})
     }
 }
