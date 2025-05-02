@@ -1,8 +1,14 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import '../../assets/styles/style.css'
 
 function Header() {
+    const location = useLocation()
+
+    const isAdmin = location.pathname.startsWith("/admin/");
+
+
+
     return (
         <div className="container">
             <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -14,24 +20,52 @@ function Header() {
                 </a>
                 <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li>
-                        <NavLink to="/admin/" end className={({ isActive }) => isActive ? 'nav_active px-2' : 'nav_inactive px-2'}>
-                            Dashboard
-                        </NavLink>
+
+                        {isAdmin ? (
+                            <NavLink to="/admin/" end className={({ isActive }) => isActive ? 'nav_active px-2' : 'nav_inactive px-2'}>
+                                Dashboard
+                            </NavLink>
+                        ) : (
+                            <NavLink to="/" end className={({ isActive }) => isActive ? 'nav_active px-2' : 'nav_inactive px-2'}>
+                                Shop
+                            </NavLink>
+                        )}
                     </li>
                     <li>
-                        <NavLink to="/admin/products"  className={({ isActive }) => isActive ? 'nav_active px-2' : 'nav_inactive px-2'}>
-                            Products
-                        </NavLink>
+                        {isAdmin ? (
+                            <NavLink to="/admin/products" className={({ isActive }) => isActive ? 'nav_active px-2' : 'nav_inactive px-2'}>
+                                Products
+                            </NavLink>
+                        ) : (
+                            <NavLink to="/orders" className={({ isActive }) => isActive ? 'nav_active px-2' : 'nav_inactive px-2'}>
+                                orders
+                            </NavLink>
+                        )}
+
                     </li>
                     <li>
-                        <NavLink to="/admin/reports"  className={({ isActive }) => isActive ? 'nav_active px-2' : 'nav_inactive px-2'}>
-                            Reports
-                        </NavLink>
+                        {isAdmin ? (
+                            <NavLink to="/admin/reports" className={({ isActive }) => isActive ? 'nav_active px-2' : 'nav_inactive px-2'}>
+                                Reports
+                            </NavLink>
+                        ) : (
+                            <NavLink to="/cart" className={({ isActive }) => isActive ? 'nav_active px-2' : 'nav_inactive px-2'}>
+                                Cart
+                            </NavLink>
+                        )}
+
                     </li>
                     <li>
-                        <NavLink to="/admin/users"  className={({ isActive }) => isActive ? 'nav_active px-2' : 'nav_inactive px-2'}>
-                            Users
-                        </NavLink>
+                        {isAdmin ? (
+                            <NavLink to="/admin/users" className={({ isActive }) => isActive ? 'nav_active px-2' : 'nav_inactive px-2'}>
+                                Users
+                            </NavLink>
+                        ) : (
+                            <NavLink to="/profile" className={({ isActive }) => isActive ? 'nav_active px-2' : 'nav_inactive px-2'}>
+                                Profile
+                            </NavLink>
+                        )}
+
                     </li>
                 </ul>
                 {/* <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">

@@ -9,18 +9,19 @@ import ProductDetails from '../pages/user/ProductDetails'
 import Cart from '../pages/user/Cart'
 import UserLogin from '../pages/auth/UserLogin'
 import UserSignup from '../pages/auth/UserSignup'
+import ProtectedRoute from './ProtectedRoute'
 
 
 function UserRoutes() {
   return (
         <Routes>
           <Route path='/' element={<UserLayout />} >
-            <Route path='' element={<Home />} />
-            <Route path='orders' element={<Orders />} />
-            <Route path='profile' element={<Profile />} />
-            <Route path='checkout' element={<Checkout />} />
-            <Route path='productdetails' element={<ProductDetails />} />
-            <Route path='cart' element={<Cart />} />
+            <Route path='' element={<ProtectedRoute><Home/></ProtectedRoute>} />
+            <Route path='orders' element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+            <Route path='profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+            <Route path='checkout' element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
+            <Route path='productdetails' element={<ProtectedRoute><ProductDetails /></ProtectedRoute>} />
+            <Route path='cart' element={<ProtectedRoute><Cart /></ProtectedRoute>} />
             <Route path='signup' element={<UserSignup />} />
             <Route path='signin' element={<UserLogin />} />
           </ Route>

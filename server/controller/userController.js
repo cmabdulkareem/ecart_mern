@@ -15,7 +15,7 @@ export const authChecking = async (req, res) =>{
     try {
         const token = req.cookies.token
         if(!token){
-            return res.status(401).json({error: "User not logged in"})
+            return res.status(401).json({error:"user not logged in", authenticated: false})
         }
 
         const decoded = jwt.verify(token, secretKey)

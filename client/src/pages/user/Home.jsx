@@ -5,13 +5,15 @@ import { ToastContainer, toast } from 'react-toastify'
 
 function Home() {
 
+  const API = import.meta.env.VITE_BACKEND_URL
+
   const navigate = useNavigate()
 
   const [products, setProducts] = useState([])
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
 
   useEffect(() => {
-    axios.get('http://localhost:3000/admin/allproducts')
+    axios.get(`${API}/admin/allproducts`)
       .then((res) => {
         setProducts(res.data.message)
       })
@@ -20,17 +22,6 @@ function Home() {
       })
   }, [])
 
-  useEffect(() => {
-    axios.get('http://localhost:3000/authCheck', {withCredentials: true})
-      .then((res) => {
-        setIsAuthenticated(res.data.authenticated)
-      })
-      .catch((err) => {
-        toast.error(err.response.data.error)
-      })
-  }, [])
-
-  if(isAuthenticated){
     return (
       <div className="row justify-content-around">
         <ToastContainer />
@@ -54,11 +45,6 @@ function Home() {
         ( <li>No items found</li> )}
       </div>
     )
-  }else{
-    navigate('/signin')
   }
-
-  
-}
 
 export default Home
